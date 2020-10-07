@@ -1,0 +1,57 @@
+.navBar {
+  padding: 5px;
+  height: 70px;
+  background-color: lightblue;
+}
+.inputBox {
+  display: flex;
+}
+.githubIcon {
+  padding: 10px;
+  font-size: 50px;
+}
+.searchBox input {
+  border-radius: 5px;
+  margin-left: 10px;
+  height: 13px;
+  width: 235px;
+  padding: 10px;
+  margin-top: 20px;
+}
+.submitBox button {
+  width: 57px;
+  height: 35px;
+  border-radius: 5;
+  margin-top: 20px;
+  margin-left: 4px;
+  padding: 6px;
+}
+.users ul {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.searchResults {
+  width: 300px;
+  border: 1px black;
+  margin: 20px;
+}
+
+.searchResults img {
+  height: 280px;
+  width: 275px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.userDetails h3 {
+  font-family: inherit;
+  font-size: x-large;
+}
+.userDetails button a {
+  text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+.userDetails button {
+  margin-top: 1px;
+    margin-bottom: 21px;
+}
