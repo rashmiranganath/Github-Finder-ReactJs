@@ -63,7 +63,7 @@ class GithubFinder extends React.Component {
                   <img src={item.avatar_url}></img>
                   <div className="userDetails">
                     <h3>{item.login}</h3>
-                    <button class="infoButton">
+                    <button className="btn btn-info" >
                       <a href={item.url}>View profile</a>
                     </button>
                   </div>
