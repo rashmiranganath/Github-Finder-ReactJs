@@ -5,6 +5,7 @@
 }
 .inputBox {
   display: flex;
+  margin-left: 600px;
 }
 .githubIcon {
   padding: 10px;
@@ -12,55 +13,95 @@
 }
 .searchBox input {
   border-radius: 5px;
-  margin-left: 10px;
-  height: 13px;
+  margin-left: 50px;
+  height: 17px;
   width: 235px;
   padding: 10px;
   margin-top: 20px;
+  border: 1px;
 }
 .submitBox button {
+  border: 1px;
   width: 57px;
   height: 35px;
   border-radius: 5;
   margin-top: 20px;
   margin-left: 4px;
   padding: 6px;
+  color: white;
+  border-radius: 5px;
+  background-color: royalblue;
 }
 .users ul {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  margin-top: 100px;
+  margin-left: 543px;
 }
 .searchResults {
-  width: 300px;
-  border: 1px black;
-  margin: 20px;
+  border-radius: 10px;
+  margin-left: 104px;
+  height: 150px;
+  position: relative;
+  border: 1px solid black;
+  padding: 1px;
+  width: 571px;
+  margin: 16px;
 }
 
 .searchResults img {
-  height: 280px;
-  width: 275px;
+  margin-left: 26px;
+  border-radius: 166px;
+  height: 100px;
+  width: 100px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 25px;
 }
 .userDetails h3 {
   margin-bottom: 10px;
   margin-top: 15px;
   font-family: inherit;
   font-size: x-large;
+  font-weight: 400;
 }
 .userDetails button a {
   text-decoration: none;
   color: black;
   padding: 5px;
 }
-.userDetails button:hover {
+.userDetails button {
+  height: 26px;
+  border-radius: 5px;
+  border: 1px;
   margin-top: 1px;
-  background-color: #4caf50; /* Green */
-  color: white;
+  background-color: lightblue;
+  font-weight: normal;
+}
+.userDetails h4 {
+  /* font-size: smaller; */
+  font-weight: normal;
 }
 .userDetails {
-  margin-left: 11px;
-  width: 275px;
-  border: 1px solid black;
-  height: 99px;
+  line-height: 10pt;
+  /* margin: 2px; */
+  font-size: smaller;
+  left: 180px;
+  text-align: left;
+  height: auto;
+  position: absolute;
+  top: 1%;
+}
+.sortBox select {
+  border: 1px;
+  background-color: white;
+  margin-top: 21px;
+  height: 36px;
+  width: 150px;
+  border-radius: 5px;
+}
+.sortBox input {
+  border: 1px;
+  color: white;
+  border-radius: 5px;
+  background-color: royalblue;
+  margin-left: 5px;
+  height: 35px;
 }
