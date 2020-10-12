@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./githubFinder.css";
 
-class GithubFinder extends React.PureComponent {
+class GithubFinder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,27 +42,31 @@ class GithubFinder extends React.PureComponent {
 
   handleSubmit = (event) => {
     const { data } = this.state;
+    const newData = [...data]
     event.preventDefault();
     switch (this.state.dropDownValue) {
       case "Ascending":
-        var sorted = data.sort((a , b) => {return a.login  - b.login})
-        console.log("a")
-        console.log(sorted)
-        console.log(this.state.dropDownValue)
+        var sorted = newData.sort((x, y) => (x.login > y.login ? 1 : -1));
+        console.log("a");
+        console.log(sorted);
+        console.log(this.state.dropDownValue);
         this.setState({
-          data : sorted
-        })
+          data: sorted
+        });
         break;
       case "Descending":
-        var sorted = data.sort((a , b) => {return b.login - a.login})
-        console.log("d")
+        var sorted1 = newData.sort((x, y) => (x.login < y.login ? 1 : -1));
+        console.log("d", sorted1);
         this.setState({
-          data : sorted
-        })
+          data: sorted1
+        });
         break;
-
+      default:
+        return data;
+        
     }
   };
+
 
   render() {
     const { data, username, dropDownValue } = this.state;
