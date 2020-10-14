@@ -5,7 +5,7 @@
 }
 .inputBox {
   display: flex;
-  margin-left: 600px;
+  justify-content: center;
 }
 .githubIcon {
   padding: 10px;
@@ -32,9 +32,12 @@
   border-radius: 5px;
   background-color: royalblue;
 }
+.users {
+  display: flex;
+  justify-content: center;
+}
 .users ul {
   margin-top: 100px;
-  margin-left: 543px;
 }
 .searchResults {
   border-radius: 10px;
@@ -46,7 +49,6 @@
   width: 571px;
   margin: 16px;
 }
-
 .searchResults img {
   margin-left: 26px;
   border-radius: 166px;

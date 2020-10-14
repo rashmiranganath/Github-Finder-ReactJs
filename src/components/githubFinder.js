@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import "./githubFinder.css";
-
 class GithubFinder extends React.Component {
   constructor(props) {
     super(props);
@@ -9,40 +8,36 @@ class GithubFinder extends React.Component {
       dropDownValue: "",
       username: "",
       data: [],
-      isLoaded: false,
+      isLoaded: false
     };
   }
-
   updateInput(input) {
     this.setState({ username: input });
   }
-
   searchUserApi(username) {
     console.log(this.state);
     console.log(username);
     axios
       .get(`https://api.github.com/search/users?q=${username}`)
-      .then((response) => {
+      .then(response => {
         console.log(response.data.items);
         this.setState({
           data: response.data.items,
-          isLoaded: true,
+          isLoaded: true
         });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }
-
   dropDownChangeValue(event) {
     this.setState({
-      dropDownValue: event,
+      dropDownValue: event
     });
   }
-
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     const { data } = this.state;
-    const newData = [...data]
+    const newData = [...data];
     event.preventDefault();
     switch (this.state.dropDownValue) {
       case "Ascending":
@@ -63,48 +58,48 @@ class GithubFinder extends React.Component {
         break;
       default:
         return data;
-        
     }
   };
-
-
-  render() {
+  renderNavBar = () => {
     const { data, username, dropDownValue } = this.state;
-    console.log(this.state);
     return (
-      <div className="navBar">
-        <div className="inputBox">
-          <div className="sortBox">
-            <form onSubmit={this.handleSubmit}>
-              <select
-                name="sort"
-                value={dropDownValue}
-                onChange={(event) => {
-                  this.dropDownChangeValue(event.target.value);
-                }}
-              >
-                <option value="Ascending">Ascending</option>
-                <option value="Descending">Descending</option>
-              </select>
-              <input type="submit" value="Submit" />
-            </form>
-          </div>
-          <div className="searchBox">
-            <input
-              type="text"
-              required
-              placeholder="username"
-              value={this.state.username}
-              onChange={(e) => this.updateInput(e.target.value)}
-            ></input>
-          </div>
-          <div className="submitBox">
-            <button onClick={() => this.searchUserApi(username)}>search</button>
-          </div>
+      <div className="inputBox">
+        <div className="sortBox">
+          <form onSubmit={this.handleSubmit}>
+            <select
+              name="sort"
+              value={dropDownValue}
+              onChange={event => {
+                this.dropDownChangeValue(event.target.value);
+              }}
+            >
+              <option value="Ascending">Ascending</option>
+              <option value="Descending">Descending</option>
+            </select>
+            <input type="submit" value="Submit" />
+          </form>
         </div>
-        <div className="users">
+        <div className="searchBox">
+          <input
+            type="text"
+            required
+            placeholder="username"
+            value={this.state.username}
+            onChange={e => this.updateInput(e.target.value)}
+          ></input>
+        </div>
+        <div className="submitBox">
+          <button onClick={() => this.searchUserApi(username)}>search</button>
+        </div>
+      </div>
+    );
+  };
+  renderUsers = () => {
+    const { data, username, dropDownValue } = this.state;
+    return (
+      <div className="users">
           <ul>
-            {data.map((item) => {
+            {data.map(item => {
               return (
                 <div className="searchResults" key={item.id}>
                   <img src={item.avatar_url}></img>
@@ -121,9 +116,17 @@ class GithubFinder extends React.Component {
             })}
           </ul>
         </div>
+    )
+  }
+  render() {
+    return (
+      <div className="mainContainer">
+      <div className="navBar">
+        {this.renderNavBar()}
+      </div>
+      {this.renderUsers()}
       </div>
     );
   }
 }
-
 export default GithubFinder;
