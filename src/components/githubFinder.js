@@ -1,6 +1,7 @@
 import React from "react";
-import "./githubFinder.css";
+import "../styles/github.css";
 import { searchUserApi, userRepos } from "../services/service";
+import { Link } from "react-router-dom";
 
 class GithubFinder extends React.PureComponent {
   constructor(props) {
@@ -92,10 +93,9 @@ class GithubFinder extends React.PureComponent {
     );
   };
 
-  handleDetails = async (id, url, index) => {
+  handleDetails = async (id, url) => {
     console.log(id);
-
-    const { selectedUserId, showDetails } = this.state;
+    const { showDetails } = this.state;
     const resp = await userRepos(url);
     console.log(resp);
     this.setState({
@@ -107,9 +107,8 @@ class GithubFinder extends React.PureComponent {
     console.log(showDetails);
   };
 
-  renderDetail = (showDetails) => {
+  renderDetail = () => {
     const { selectedUserDetails } = this.state;
-
     const userData = selectedUserDetails;
     console.log(userData);
     return (
@@ -142,12 +141,18 @@ class GithubFinder extends React.PureComponent {
               <div className="searchResults" key={item.id}>
                 <div className="userInfo">
                   <div className="imageDiv">
-                    <img src={item.avatar_url} alt="avatar" />
+                    <Link to="/profile">
+                      <img src={item.avatar_url} alt="avatar" />
+                    </Link>
                   </div>
                   <div className="userDetails">
-                    <h3>{item.login}</h3>
+                    <Link to={`/${item.login}`}>
+                      <h3>{item.login}</h3>
+                    </Link>
                     <h4>score :{item.score}</h4>
-                    <h4>Profile url :{item.url}</h4>
+                    <Link to="/profile">
+                      <h4>Profile url :{item.url}</h4>
+                    </Link>
                     <div>
                       <button
                         className="btn btn-info"

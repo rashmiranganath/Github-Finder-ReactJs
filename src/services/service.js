@@ -6,7 +6,12 @@ const searchUserApi = (username) => {
 };
 
 const userRepos = (url) => {
+  console.log(url)
   return axios.get(url);
 };
 
-export { searchUserApi, userRepos };
+const profileApi = (username) => {
+  return axios.get(`https://api.github.com/users/${username}`);
+};
+
+export { searchUserApi, userRepos, profileApi };

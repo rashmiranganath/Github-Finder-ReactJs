@@ -1,0 +1,60 @@
+@import "variables";
+
+@mixin size($height, $padding) {
+  height: $height;
+  padding: $padding;
+}
+
+@mixin center($margin-left, $margin-right) {
+  margin-left: $margin-left;
+  margin-right: $margin-right;
+}
+@mixin border($border, $borderRadius) {
+  border: $border;
+  border-radius: $borderRadius;
+}
+.nav {
+  @include size(70px, 5px);
+  background-color: $navBarBackground;
+}
+.profileCard {
+  @include center(auto, auto);
+  @include border(1px solid black, 40px);
+  margin-top: 80px;
+  width: 300px;
+  padding: 50px;
+  .imgDiv {
+    @include center(auto, auto);
+    img {
+      height: 230px;
+      width: 230px;
+      @include border(0px, 115px);
+    }
+  }
+  .userInfo {
+    display: $displayFlex;
+    flex-direction: column;
+    .username {
+      color: royalblue;
+      margin: $margin;
+      text-align: $text-align;
+      font-size: xx-large;
+      margin-top: 25px;
+    }
+    .bio {
+      margin: $margin;
+      text-align: $text-align;
+    }
+    .followDetails {
+      margin-top:10px;
+      text-align: left;
+      line-height: 30px;
+      margin-left: 20%;
+      i {
+        text-align: left;
+        font-size: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+}

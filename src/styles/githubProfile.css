@@ -1,0 +1,64 @@
+.nav {
+  height: 70px;
+  padding: 5px;
+  background-color: lightblue;
+}
+
+.profileCard {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  border-radius: 40px;
+  margin-top: 80px;
+  width: 300px;
+  padding: 50px;
+}
+
+.profileCard .imgDiv {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profileCard .imgDiv img {
+  height: 230px;
+  width: 230px;
+  border: 0px;
+  border-radius: 115px;
+}
+
+.profileCard .userInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profileCard .userInfo .username {
+  color: royalblue;
+  margin: 10px;
+  text-align: center;
+  font-size: xx-large;
+  margin-top: 25px;
+}
+
+.profileCard .userInfo .bio {
+  margin: 10px;
+  text-align: center;
+}
+
+.profileCard .userInfo .followDetails {
+  margin-top: 10px;
+  text-align: left;
+  line-height: 30px;
+  margin-left: 20%;
+}
+
+.profileCard .userInfo .followDetails i {
+  text-align: left;
+  font-size: 20px;
+  margin-right: 20px;
+}
+/*# sourceMappingURL=githubProfile.css.map */
