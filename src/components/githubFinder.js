@@ -141,7 +141,7 @@ class GithubFinder extends React.PureComponent {
               <div className="searchResults" key={item.id}>
                 <div className="userInfo">
                   <div className="imageDiv">
-                    <Link to="/profile">
+                    <Link to={`/${item.login}`}>
                       <img src={item.avatar_url} alt="avatar" />
                     </Link>
                   </div>
@@ -150,7 +150,7 @@ class GithubFinder extends React.PureComponent {
                       <h3>{item.login}</h3>
                     </Link>
                     <h4>score :{item.score}</h4>
-                    <Link to="/profile">
+                    <Link to={`/${item.login}`}>
                       <h4>Profile url :{item.url}</h4>
                     </Link>
                     <div>

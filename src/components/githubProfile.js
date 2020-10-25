@@ -1,11 +1,12 @@
 import React from "react";
 import "../styles/githubProfile.css";
-import { profileApi } from "../services/service";
+import { profileApi, repoLink } from "../services/service";
 
 class GithubProfile extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      repoData: [],
       userProfileDetails: "",
       isLoaded: false,
     };
@@ -18,51 +19,79 @@ class GithubProfile extends React.PureComponent {
 
   profileDetails = async (username) => {
     const response = await profileApi(username);
+    const repoInfo = await repoLink(username);
+    console.log(repoInfo.data);
     console.log(response.data);
     this.setState({
+      repoData: repoInfo.data,
       userProfileDetails: response.data,
       isLoaded: true,
     });
   };
 
   renderProfileDetails = () => {
-    const { userProfileDetails } = this.state;
+    const { userProfileDetails, repoData } = this.state;
+    console.log(repoData, "fff");
     console.log(userProfileDetails);
     return (
       <div className="githubProfile">
         <div className="nav"></div>
         <div className="profileCard">
-          <div className="imgDiv">
-            <img src={userProfileDetails.avatar_url} />
+          <div className="profileImgBio">
+            <div className="imgDiv">
+              <img src={userProfileDetails.avatar_url} />
+            </div>
+            <div className="userInfo">
+              <div className="username">
+                <span>{userProfileDetails.login}</span>
+              </div>
+              <div className="locationBioDiv">
+                <div className="location">
+                  <div className="placeBold">Created At</div>
+                  <div className="createdAt">
+                    {userProfileDetails.created_at}
+                  </div>
+                </div>
+                <div className="bio">
+                  <div className="bioBold">Update At</div>
+                  <div className="updatedAt">
+                    {userProfileDetails.updated_at}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="userInfo">
-            <div className="username">
-              <span>{userProfileDetails.login}</span>
+          <div className="repoFollowData">
+            <div className="followDiv">
+              <div className="followDetailsCount">
+                <div className="followersCount">
+                  <span>{userProfileDetails.followers}</span>
+                </div>
+                <div className="followingCount">
+                  <span>{userProfileDetails.following}</span>
+                </div>
+                <div className="publicReposCount">
+                  <span>{userProfileDetails.public_repos}</span>
+                </div>
+              </div>
+              <div className="followDetails">
+                <div className="followers">
+                  <span>Followers</span>
+                </div>
+                <div className="following">
+                  <span>Following</span>
+                </div>
+                <div className="publicRepos">
+                  <span>Repositories</span>
+                </div>
+              </div>
             </div>
-            <div className="bio">
-              <span>
-                {userProfileDetails.bio === null
-                  ? true
-                  : userProfileDetails.bio}
-              </span>
-            </div>
-            <div className="followDetails">
-              <div className="followers">
-              <i  class='fas'>&#xf500;</i>
-                <span>Followers : {userProfileDetails.followers}</span>
-              </div>
-              <div className="following">
-                <i class="fas">&#xf4fc;</i>
-                <span>Following : {userProfileDetails.following}</span>
-              </div>
-              <div className="location">
-                <i class="fas">&#xf3c5;</i>
-                <span>Place : {userProfileDetails.location}</span>
-              </div>
-              <div className="publicRepos">
-              <i class='fas'>&#xf022;</i>
-                <span>public Repos : {userProfileDetails.public_repos}</span>
-              </div>
+
+            <div className="repoNames">
+              {repoData.map((item, i) => {
+                console.log(item);
+                return i < 5 ? <span>{item.name}</span> : true;
+              })}
             </div>
           </div>
         </div>

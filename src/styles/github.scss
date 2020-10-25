@@ -1,14 +1,11 @@
 @import "variables";
 
-
-
 @mixin size($height, $padding) {
   height: $height;
   padding: $padding;
 }
- 
 
-@mixin border($border , $borderRadius){
+@mixin border($border, $borderRadius) {
   border: $border;
   border-radius: $borderRadius;
 }
@@ -26,7 +23,7 @@
   font-size: 50px;
 }
 .searchBox input {
-  @include border(1px , 5px);
+  @include border(1px, 5px);
   margin-left: 50px;
   height: 17px;
   width: 235px;
@@ -86,6 +83,8 @@
   font-weight: normal;
 }
 .userDetails h4 {
+  text-decoration: none;
+
   font-family: sans-serif;
 }
 .userDetails {
@@ -95,6 +94,10 @@
   left: 180px;
   text-align: left;
   height: auto;
+  a {
+    color: black;
+    text-decoration: none;
+  }
 }
 .sortBox select {
   border: 1px;

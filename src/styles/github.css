@@ -86,6 +86,7 @@
 }
 
 .userDetails h4 {
+  text-decoration: none;
   font-family: sans-serif;
 }
 
@@ -96,6 +97,11 @@
   left: 180px;
   text-align: left;
   height: auto;
+}
+
+.userDetails a {
+  color: black;
+  text-decoration: none;
 }
 
 .sortBox select {

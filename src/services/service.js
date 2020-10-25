@@ -14,4 +14,8 @@ const profileApi = (username) => {
   return axios.get(`https://api.github.com/users/${username}`);
 };
 
-export { searchUserApi, userRepos, profileApi };
+const repoLink  = (username) => {
+  return axios.get(`https://api.github.com/users/${username}/repos`)
+}
+
+export { searchUserApi, userRepos, profileApi ,repoLink };
