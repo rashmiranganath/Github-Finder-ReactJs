@@ -1,21 +1,35 @@
-import React from "react";
-import "./App.css";
-import GithubFinder from "./components/githubFinder";
-import GithubProfile from "./components/githubProfile";
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+const GithubFinder = lazy(() => import("./components/githubFinder"));
+const GithubProfile = lazy(() => import("./components/githubProfile"));
+const ErrorBoundary = lazy(() => import("./components/ErrorBoundary"));
+const ProctectedRoute = lazy(() => import("./components/protectedRoutes"));
+const Loader = lazy(() => import("./components/loader"))
+const Login = import("./components/login");
+
+
+
+
 function App(props) {
-  console.log(props)
   return (
-    <div>
-      <Router>
-        <Switch>  
-          <Route exact path="/" component={GithubFinder} />
-          <Route exact path="/:username" render={(props) => (<GithubProfile {...props} />)} />
-        </Switch>
-      </Router>
-    </div>
+    <>
+      <ErrorBoundary>
+        <Router>
+          <Suspense fallback={<Loader />}>
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <ProctectedRoute exact path="/home" component={GithubFinder} isAuth={true} />
+              <Route exact path="/:username" render={(props) => (<GithubProfile {...props} />)} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </ErrorBoundary>
+
+    </>
   );
 }
 
 export default App;
+
+

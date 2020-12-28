@@ -187,4 +187,5 @@ class GithubFinder extends React.PureComponent {
     );
   }
 }
+
 export default GithubFinder;
