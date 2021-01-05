@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/github.css";
+// import "../styles/github.css";
 import { searchUserApi, userRepos } from "../services/service";
 import { Link } from "react-router-dom";
 

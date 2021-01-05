@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/githubProfile.css";
+// import "../styles/githubProfile.css";
 import { profileApi, repoLink } from "../services/service";
 
 class GithubProfile extends React.PureComponent {
