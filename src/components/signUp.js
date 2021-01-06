@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { withRouter, Redirect } from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -46,20 +47,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
-
- const  navigateToLogin = () => {
-    this.props.headerAppBar("Signup")
-
-    this.props.history.push("/")
-  }
-
-  const signUp = () => {
-    this.props.headerAppBar("Signup")
-    this.props.history.push("/")
-  }
-
+function SignUp(props) {
   const classes = useStyles();
+
+
+
+  const signUpbutton = (props) => {
+    console.log( " ,,," , props)
+    const { history } = props
+    history.push('/')
+  }
+
+
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -88,35 +88,26 @@ export default function SignUp() {
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
-                id="lastName"
                 label="Last Name"
                 name="lastName"
-                autoComplete="lname"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
-                id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
-                autoComplete="current-password"
               />
             </Grid>
             <Grid item xs={12}>
@@ -132,14 +123,15 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onclick={signUp}
+            onClick={() => signUpbutton(props)}
 
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link onclick={navigateToLogin} variant="body2">
+              <Link onClick={() => signUpbutton(props)}
+                variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -152,3 +144,5 @@ export default function SignUp() {
     </Container>
   );
 }
+
+export default withRouter(SignUp)

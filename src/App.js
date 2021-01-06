@@ -19,42 +19,11 @@ const Login = lazy(() => import("./components/login"));
 
 function App(props) {
   const [auth, setAuth] = useState(false);
-  const [isLogin ,header] = useState("")
-  const [appHeader, setappHeader] = useState("signup")
-
-  console.log(auth)
-
- const setHeader = (headerValue) => {
-  header(headerValue)
-  console.log(headerValue)
-
- }
 
   const setAuthToTrue = (value) => {
     console.log(value)
     setAuth(value)
   }
-  console.log(",,,,,",isLogin)
-
-// if(isLogin == "signup" && auth == false){
-//   setappHeader("login")
-// }else if(isLogin == "login" && auth == false){
-//   setappHeader("signup")
-// }
-// else {
-//   setappHeader("logout")
-// // }
-// switch(isLogin){
-//   case "signup":
-//     setappHeader("login")
-//   case "login":
-//     setappHeader("signup")
-//   default :
-//   setappHeader("logout")
-
-    
-
-// }
 
   return (
     <>
@@ -62,16 +31,15 @@ function App(props) {
         <ErrorBoundary>
           <Router>
             <UserProvider value={{ isAuth: auth }}>
-              <ButtonAppBar  headervalue={appHeader}/>
+              <ButtonAppBar setAuthToTrue={setAuthToTrue} auth={auth} />
               <Switch>
-                <Route exact path="/signUp"  render={(props) => (<SignUp {...props} headerAppBar={setHeader} />)}></Route>
-                <Route exact path="/" render={(props) => (<Login {...props} set={setAuthToTrue} headerAppBar={setHeader} />)} />
+                <Route exact path="/signUp" render={(props) => (<SignUp {...props} auth={auth} setAuthToTrue={setAuthToTrue} />)}></Route>
+                <Route exact path="/" render={(props) => (<Login {...props} set={setAuthToTrue} />)} />
                 <ProctectedRoute exact path="/home" component={GithubFinder} />
                 <Route exact path="/:username" render={(props) => (<GithubProfile {...props} />)} />
               </Switch>
             </UserProvider>
-
-          </Router>
+            </Router>
         </ErrorBoundary>
       </Suspense>
 

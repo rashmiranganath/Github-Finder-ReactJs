@@ -27,16 +27,10 @@ class Login extends React.Component {
         }, () => {
             this.props.set(this.state.isAuth);
             this.props.history.push("/home")
-            this.props.headerAppBar("logout")
         })
     }
 
     navigateToSignup = () => {
-        return true, () => {
-            this.props.headerAppBar("login")
-
-            this.props.history.push("/signUp")
-        }
 
     }
 
@@ -56,7 +50,7 @@ class Login extends React.Component {
 
 
     render() {
-        const paperStyle = { padding: 10, height: "50vh", width: 350, margin: "20px auto" }
+        const paperStyle = { padding: 10, width: 350, margin: "20px auto" }
         const avatarStyle = { backgroundColor: ' #10bf10' }
         const btnStyle = { margin: "10px 0" }
         return (

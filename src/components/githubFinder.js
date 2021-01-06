@@ -1,7 +1,7 @@
 import React from "react";
-// import "../styles/github.css";
 import { searchUserApi, userRepos } from "../services/service";
 import { Link } from "react-router-dom";
+import SideBar from './SideBar'
 
 class GithubFinder extends React.PureComponent {
   constructor(props) {
@@ -181,6 +181,7 @@ class GithubFinder extends React.PureComponent {
   render() {
     return (
       <div className="mainContainer">
+        <SideBar />
         <div className="navBar">{this.renderNavBar()}</div>
         {this.renderUsers()}
       </div>
