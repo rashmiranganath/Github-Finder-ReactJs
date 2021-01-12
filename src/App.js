@@ -4,6 +4,9 @@ import Loader from "./components/loader"
 import { UserProvider } from "./components/context"
 import ButtonAppBar from "./components/AppBar"
 import SignUp from "./components/signUp"
+import HomePage from "./components/HomePage"
+import LoginProfile from "./components/loginProfile"
+import "./App.css"
 
 
 
@@ -33,13 +36,14 @@ function App(props) {
             <UserProvider value={{ isAuth: auth }}>
               <ButtonAppBar setAuthToTrue={setAuthToTrue} auth={auth} />
               <Switch>
+                <Route exact path="/user" render={(props) => (<LoginProfile {...props} />)} />
                 <Route exact path="/signUp" render={(props) => (<SignUp {...props} auth={auth} setAuthToTrue={setAuthToTrue} />)}></Route>
                 <Route exact path="/" render={(props) => (<Login {...props} set={setAuthToTrue} />)} />
-                <ProctectedRoute exact path="/home" component={GithubFinder} />
+                <ProctectedRoute exact path="/home" component={HomePage} />
                 <Route exact path="/:username" render={(props) => (<GithubProfile {...props} />)} />
               </Switch>
             </UserProvider>
-            </Router>
+          </Router>
         </ErrorBoundary>
       </Suspense>
 
