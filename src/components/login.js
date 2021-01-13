@@ -12,7 +12,8 @@ class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isAuth: false
+            isAuth: false,
+            username: ""
 
         }
         console.log(this.props)
@@ -25,13 +26,19 @@ class Login extends React.Component {
         this.setState({
             isAuth: true
         }, () => {
+            localStorage.setItem('user', this.state.username);
             this.props.set(this.state.isAuth);
             this.props.history.push("/home")
         })
     }
 
+    setUserName = (name) => {
+        this.setState({
+            username: name
+        })
+    }
     navigateToSignup = () => {
-
+        this.props.history.push("/signUp")
     }
 
     Copyright = () => {
@@ -65,8 +72,8 @@ class Login extends React.Component {
                             <h2>Sign in</h2>
                         </Grid>
 
-                        <TextField label="Username" placeholder="Enter username" fullWidth required />
-                        <TextField label="Password" placeholder="Enter password" fullWidth required type="password" />
+                        <TextField label="Username" required value={this.state.username} onChange={(e) => { this.setUserName(e.target.value) }} placeholder="Enter username" fullWidth required />
+                        <TextField label="Password" required placeholder="Enter password" fullWidth required type="password" />
 
                         <FormControlLabel
                             control={

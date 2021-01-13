@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Typography from '@material-ui/core/Typography'
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,6 +44,8 @@ function GithubFinder(props) {
   const classes = useStyles();
   const [userData, setUserData] = useState([])
   const [dataLoaded, setDataLoaded] = useState(false)
+  // const [searchData , setSearchData] = 
+
 
   const searchMessage = () => {
     return (
@@ -54,15 +56,34 @@ function GithubFinder(props) {
       </div>
     )
   }
-  const fetchUserData = async (userInput) => {
-    console.log("heeloim input ", (userInput))
-    const data = await searchUserApi(userInput)
-    setDataLoaded(true)
-    console.log(data)
-    setUserData(data)
-    console.log("updated", userData)
+  // const fetchUserData = async (userInput) => {
+  //   console.log("heeloim input ", (userInput))
+  //   const data = await searchUserApi(userInput)
+  //   setDataLoaded(true)
+  //   console.log(data)
+  //   setUserData(data)
+  //   console.log("updated", userData)
 
+  // }
+
+  useEffect(async (props) => {
+    if (dataLoaded) {
+      const result = await searchUserApi(props.userInput)
+      setDataLoaded(true)
+      console.log(result)
+      setUserData(result)
+    } else {
+      console.log("kkk")
+    }
+
+  });
+
+  const search = (props) => {
+    
+    setDataLoaded(props.searchBtnClicked)
+    return renderUsers()
   }
+
 
   const renderUsers = () => {
     console.log("im not found", userData)
@@ -93,10 +114,10 @@ function GithubFinder(props) {
 
   return (
     <>
-      {props.searchBtnClicked ? fetchUserData(props.userInput) : searchMessage()}
-      {/* {props.updateSearchBtnClicked(!props.searchBtnClicked)} */}
-      {/* {userData && {renderUsers}} */}
-      {dataLoaded && (() => {renderUsers()})}
+      {/* {dataLoaded && renderUsers() } */}
+      {/* {search(props)} */}
+      {props.searchBtnClicked ? search(props) : searchMessage()}
+
     </>
 
   )
