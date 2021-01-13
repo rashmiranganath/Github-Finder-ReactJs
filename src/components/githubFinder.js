@@ -66,58 +66,56 @@ function GithubFinder(props) {
 
   // }
 
-  useEffect(async (props) => {
-    if (dataLoaded) {
-      const result = await searchUserApi(props.userInput)
-      setDataLoaded(true)
-      console.log(result)
-      setUserData(result)
-    } else {
-      console.log("kkk")
-    }
+  useEffect(() => {
+    const getData = async () => {
+      if (props.userInput) {
+        const result = await searchUserApi(props.userInput);
+        setDataLoaded(true);
+        console.log(result);
+        setUserData(result.data.items);
+      } else {
+        console.log("kkk");
+      }
+    };
+    getData();
+  }, [props.userInput]);
 
-  });
 
-  const search = (props) => {
-    
-    setDataLoaded(props.searchBtnClicked)
-    return renderUsers()
-  }
 
 
   const renderUsers = () => {
     console.log("im not found", userData)
-    dataLoaded && userData.map((item) => {
-      return (
-        <div className="searchResults" key={item.id}>
-          <div className="userInfo">
-            <div className="imageDiv">
-              <Link to={`/${item.login}`}>
-                <img src={item.avatar_url} alt="avatar" />
-              </Link>
-            </div>
-            <div className="userDetails">
-              <Link to={`/${item.login}`}>
-                <h3>{item.login}</h3>
-              </Link>
-              <h4>score :{item.score}</h4>
-              <Link to={`/${item.login}`}>
-                <h4>Profile url :{item.url}</h4>
-              </Link>
+    return (
+      dataLoaded && userData.map((item) => {
+        return (
+          <div className="searchResults" key={item.id}>
+            <div className="userInfo">
+              <div className="imageDiv">
+                <Link to={`/${item.login}`}>
+                  <img src={item.avatar_url} alt="avatar" />
+                </Link>
+              </div>
+              <div className="userDetails">
+                <Link to={`/${item.login}`}>
+                  <h3>{item.login}</h3>
+                </Link>
+                <h4>score :{item.score}</h4>
+                <Link to={`/${item.login}`}>
+                  <h4>Profile url :{item.url}</h4>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      )
-    })
+        )
+      })
+    )
+
   }
 
 
   return (
     <>
-      {/* {dataLoaded && renderUsers() } */}
-      {/* {search(props)} */}
-      {props.searchBtnClicked ? search(props) : searchMessage()}
-
+      {props.searchBtnClicked ? renderUsers() : searchMessage()}
     </>
 
   )

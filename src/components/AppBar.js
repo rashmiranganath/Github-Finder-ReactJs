@@ -121,6 +121,7 @@ function ButtonAppBar(props) {
               <SearchIcon />
             </Button>
           </div> : true}
+          
           <div>{searchBtnClicked && <GithubFinder updateSearchBtnClicked={updateSearchBtnClicked} searchBtnClicked={searchBtnClicked} userInput={userInput} />}</div>
           <Button color="inherit" onClick={() => onClickHandler(props)}>{headerValue(history, auth)}</Button>
         </Toolbar>

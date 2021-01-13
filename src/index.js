@@ -7,15 +7,13 @@ import { createMuiTheme ,ThemeProvider } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue';
+import './styles/color.module.css'
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: blue[700],
-    },
-    secondary: {
-      main: green[500],
-    },
+      main: blue[700]
+    }
   },
 });
 
