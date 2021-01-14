@@ -80,6 +80,8 @@ function ButtonAppBar(props) {
   const searchUsers = async (username) => {
     updateSearchBtnClicked(true)
     console.log(searchBtnClicked, "searchbutton")
+    // return  <div>{searchBtnClicked && <GithubFinder updateSearchBtnClicked={updateSearchBtnClicked} searchBtnClicked={searchBtnClicked} userInput={userInput} />}</div> 
+
 
   };
   const classes = useStyles();
@@ -121,8 +123,8 @@ function ButtonAppBar(props) {
               <SearchIcon />
             </Button>
           </div> : true}
-          
-          <div>{searchBtnClicked && <GithubFinder updateSearchBtnClicked={updateSearchBtnClicked} searchBtnClicked={searchBtnClicked} userInput={userInput} />}</div>
+          <div>{searchBtnClicked && <GithubFinder searchBtnClicked={searchBtnClicked} userInput={userInput} />}</div>
+
           <Button color="inherit" onClick={() => onClickHandler(props)}>{headerValue(history, auth)}</Button>
         </Toolbar>
       </AppBar>

@@ -56,15 +56,7 @@ function GithubFinder(props) {
       </div>
     )
   }
-  // const fetchUserData = async (userInput) => {
-  //   console.log("heeloim input ", (userInput))
-  //   const data = await searchUserApi(userInput)
-  //   setDataLoaded(true)
-  //   console.log(data)
-  //   setUserData(data)
-  //   console.log("updated", userData)
 
-  // }
 
   useEffect(() => {
     const getData = async () => {
@@ -85,7 +77,7 @@ function GithubFinder(props) {
 
   const renderUsers = () => {
     console.log("im not found", userData)
-    return (
+    return(
       dataLoaded && userData.map((item) => {
         return (
           <div className="searchResults" key={item.id}>
@@ -116,7 +108,7 @@ function GithubFinder(props) {
   return (
     <>
       {props.searchBtnClicked ? renderUsers() : searchMessage()}
-    </>
+         </>
 
   )
 }

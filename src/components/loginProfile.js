@@ -110,6 +110,7 @@ export default function LoginProfile() {
                         <StarOutlineIcon />
                     </Grid>
                     <Grid>
+
                         <Typography className={classes.details}>Pro </Typography>
                     </Grid>
                 </Grid>
