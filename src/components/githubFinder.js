@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Typography from '@material-ui/core/Typography'
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { searchUserApi } from '../services/service'
-import { Link } from 'react-router-dom'
+import { UserConsumer } from "./context"
+
 
 
 
@@ -36,6 +37,20 @@ const useStyles = makeStyles((theme) => ({
     width: "80px",
     padding: "15px"
   },
+  userDataImg: {
+    width: "130px",
+    borderRadius: "67px",
+    marginRight: "75px",
+    marginTop: "10px"
+  },
+  userDataFlex: {
+    display: "flex",
+    alignItem: "center"
+  },
+  userDataBox :{
+    border : "2px",
+    marginTop : "10px"
+  }
 }));
 
 
@@ -44,7 +59,8 @@ function GithubFinder(props) {
   const classes = useStyles();
   const [userData, setUserData] = useState([])
   const [dataLoaded, setDataLoaded] = useState(false)
-  // const [searchData , setSearchData] = 
+  const context = useContext(UserConsumer)
+
 
 
   const searchMessage = () => {
@@ -60,8 +76,8 @@ function GithubFinder(props) {
 
   useEffect(() => {
     const getData = async () => {
-      if (props.userInput) {
-        const result = await searchUserApi(props.userInput);
+      if (context.username) {
+        const result = await searchUserApi(context.username);
         setDataLoaded(true);
         console.log(result);
         setUserData(result.data.items);
@@ -70,45 +86,41 @@ function GithubFinder(props) {
       }
     };
     getData();
-  }, [props.userInput]);
+  }, [context.username]);
 
 
 
 
   const renderUsers = () => {
     console.log("im not found", userData)
-    return(
+    return (
       dataLoaded && userData.map((item) => {
         return (
-          <div className="searchResults" key={item.id}>
-            <div className="userInfo">
-              <div className="imageDiv">
-                <Link to={`/${item.login}`}>
-                  <img src={item.avatar_url} alt="avatar" />
-                </Link>
-              </div>
-              <div className="userDetails">
-                <Link to={`/${item.login}`}>
+          <>
+            <Box  border={1} borderRadius={15} styles={{marginTop: "10px"}}>
+              <Grid className={classes.userDataFlex} >
+                <Grid >
+                  <img src={item.avatar_url} alt="avatar" className={classes.userDataImg} />
+                </Grid>
+                <Grid styles={{ margin: "20px" }}>
                   <h3>{item.login}</h3>
-                </Link>
-                <h4>score :{item.score}</h4>
-                <Link to={`/${item.login}`}>
+                  <h4>score :{item.score}</h4>
                   <h4>Profile url :{item.url}</h4>
-                </Link>
-              </div>
-            </div>
-          </div>
+                </Grid>
+              </Grid>
+            </Box>
+
+          </>
         )
       })
     )
-
   }
 
 
   return (
     <>
-      {props.searchBtnClicked ? renderUsers() : searchMessage()}
-         </>
+      {context.searchBtn ? renderUsers() : searchMessage()}
+    </>
 
   )
 }

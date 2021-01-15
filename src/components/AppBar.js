@@ -71,13 +71,13 @@ const useStyles = makeStyles((theme) => ({
 
 function ButtonAppBar(props) {
   const [userInput, setUserInput] = useState("")
-  const [
-    searchBtnClicked, updateSearchBtnClicked] = useState(false)
+  const [searchBtnClicked, updateSearchBtnClicked] = useState(false)
 
   const updateInput = (input) => {
     setUserInput(input);
   }
-  const searchUsers = async (username) => {
+  const searchUsers = async () => {
+    props.getSearchDetails(userInput ,searchBtnClicked )
     updateSearchBtnClicked(true)
     console.log(searchBtnClicked, "searchbutton")
     // return  <div>{searchBtnClicked && <GithubFinder updateSearchBtnClicked={updateSearchBtnClicked} searchBtnClicked={searchBtnClicked} userInput={userInput} />}</div> 
@@ -119,11 +119,11 @@ function ButtonAppBar(props) {
               inputProps={{ 'aria-label': 'search' }}
               value={userInput}
               onChange={(e) => updateInput(e.target.value)} />
-            <Button style={{ color: "white" }} onClick={() => { searchUsers(userInput) }}>
+            <Button style={{ color: "white" }} onClick={(props) => { searchUsers(userInput) }}>
               <SearchIcon />
             </Button>
           </div> : true}
-          <div>{searchBtnClicked && <GithubFinder searchBtnClicked={searchBtnClicked} userInput={userInput} />}</div>
+          {/* <div>{searchBtnClicked && <GithubFinder searchBtnClicked={searchBtnClicked} userInput={userInput} />}</div> */}
 
           <Button color="inherit" onClick={() => onClickHandler(props)}>{headerValue(history, auth)}</Button>
         </Toolbar>

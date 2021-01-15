@@ -6,11 +6,11 @@ import { UserConsumer } from "./context"
 
 
 function ProctectedRoute({ isAuth: isAuth, component: Component, ...rest }) {
-    const auth = useContext(UserConsumer)
-    console.log(".....",auth.isAuth)
+    const context = useContext(UserConsumer)
+    console.log(".....",context.isAuth)
 
     return <Route {...rest} render={(props) => {
-        if (auth.isAuth) {
+        if (context.isAuth) {
             return <Component />
         } else {
             return <Redirect to={{ path: "/", state: { from: props.location } }} />

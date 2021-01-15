@@ -14,7 +14,6 @@ class Login extends React.Component {
         this.state = {
             isAuth: false,
             username: ""
-
         }
         console.log(this.props)
     }
