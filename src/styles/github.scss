@@ -1,11 +1,11 @@
 @import "variables";
 
-@mixin size($height, $padding) {
+@mixin size($height, $padding){
   height: $height;
   padding: $padding;
 }
 
-@mixin border($border, $borderRadius) {
+@mixin border($border, $borderRadius){
   border: $border;
   border-radius: $borderRadius;
 }
@@ -117,6 +117,8 @@
 }
 .userData {
   margin-top: 15px;
+  overflow-y: scroll;
+    height: 425px;
 }
 .userInfo {
   display: flex;

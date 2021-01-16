@@ -124,6 +124,8 @@
 
 .userData {
   margin-top: 15px;
+  overflow-y: scroll;
+  height: 425px;
 }
 
 .userInfo {

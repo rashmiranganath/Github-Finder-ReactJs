@@ -90,7 +90,7 @@ class GithubProfile extends React.PureComponent {
             <div className="repoNames">
               {repoData.map((item, i) => {
                 console.log(item);
-                return i < 5 ? <span>{item.name}</span> : true;
+                return <span>{item.name}</span>
               })}
             </div>
           </div>

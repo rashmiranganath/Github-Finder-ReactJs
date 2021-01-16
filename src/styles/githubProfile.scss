@@ -1,23 +1,28 @@
 @import "variables";
+
 @mixin size($height, $padding) {
   height: $height;
   padding: $padding;
+}
+
+@mixin flex($display, $flexDirection, $justifyContent) {
+  display: $display;
+  flex-direction: $flexDirection;
+  justify-content: $justifyContent;
 }
 .nav {
   @include size(70px, 5px);
   background-color: $navBarBackground;
 }
+
 .profileCard {
   margin-top: 50px;
-  height: 900px;
   display: flex;
   justify-content: center;
 
   .profileImgBio {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    height: 700px;
     .imgDiv {
       display: flex;
       justify-content: center;
@@ -29,14 +34,10 @@
     }
     .userInfo {
       height: 400px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
+      @include flex(flex, column, space-around);
       .username {
         height: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+        @include flex(flex, column, space-evenly);
         align-items: center;
         span {
           font-size: xx-large;
@@ -44,16 +45,12 @@
       }
       .locationBioDiv {
         height: 300px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+        @include flex(flex, column, space-evenly);
       }
       .location {
         align-items: center;
         border: 2px solid black;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        @include flex(flex, column, center);
         height: 150px;
         background-color: aliceblue;
         .placeBold {
@@ -62,12 +59,12 @@
         }
       }
       .bio {
+        @include flex(flex, column, center);
+
         background-color: whitesmoke;
         align-items: center;
-        display: flex;
-        flex-direction: column;
+
         height: 150px;
-        justify-content: center;
         border: 2px solid black;
         width: 300px;
         .bioBold {
@@ -81,10 +78,6 @@
     }
   }
   .repoFollowData {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 700px;
     .followDetailsCount {
       align-items: center;
       display: flex;
@@ -97,36 +90,32 @@
         width: 100px;
         background-color: wheat;
         border-radius: 65px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        @include flex(flex, column, center);
         align-items: center;
       }
       .followingCount {
-        font-size: xxx-large;
         height: 100px;
+        font-size: xxx-large;
         width: 100px;
         background-color: wheat;
         border-radius: 65px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        @include flex(flex, column, center);
         align-items: center;
       }
       .publicReposCount {
-        font-size: xxx-large;
         height: 100px;
+
+        font-size: xxx-large;
         width: 100px;
         background-color: wheat;
         border-radius: 65px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        @include flex(flex, column, center);
+
         align-items: center;
       }
     }
     .followDetails {
-      height: 100px;
+      padding: 25px;
       display: flex;
       width: 600px;
       justify-content: space-around;
@@ -145,15 +134,17 @@
       }
     }
     .repoNames {
-      height: 645px;
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
       align-items: center;
+      overflow-y: scroll;
+      padding: 25px;
+      height: 472px;
       span {
+        padding: 15px;
+        margin-bottom: 12px;
         font-size: x-large;
         border-radius: 10px;
-        height: 80px;
         width: 500px;
         border: 1px solid black;
         background-color: lavenderblush;

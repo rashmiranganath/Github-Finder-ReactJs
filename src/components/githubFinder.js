@@ -14,12 +14,14 @@ class GithubFinder extends React.PureComponent {
       selectedUserId: "",
       selectedUserDetails: {},
       showDetails: false,
+      selectedUserIdsData: {},
+      selectedUserData: {},
     };
   }
+
   updateInput(input) {
     this.setState({ username: input });
   }
-
   searchUsers = async (username) => {
     const response = await searchUserApi(username);
     this.setState({
@@ -27,7 +29,6 @@ class GithubFinder extends React.PureComponent {
       isLoaded: true,
     });
   };
-
   dropDownChangeValue(event) {
     this.setState({
       dropDownValue: event,
@@ -92,29 +93,46 @@ class GithubFinder extends React.PureComponent {
       </div>
     );
   };
-
   handleDetails = async (id, url) => {
     console.log(id);
-    const { showDetails } = this.state;
+    const { showDetails, selectedUserIdsData, selectedUserData } = this.state;
     const resp = await userRepos(url);
     console.log(resp);
+    let copyOfIds = {};
+    let copyOfData = {};
+    copyOfData = {
+      ...selectedUserData,
+      [id]: selectedUserData[id] ? selectedUserData[id] : resp.data,
+    };
+    copyOfIds = {
+      ...selectedUserIdsData,
+      [id]: selectedUserIdsData[id] ? !selectedUserIdsData[id] : true,
+    };
     this.setState({
       showDetails: !showDetails,
       selectedUserId: id,
       selectedUrl: url,
       selectedUserDetails: resp.data,
+      selectedUserIdsData: copyOfIds,
+      selectedUserData: copyOfData,
     });
     console.log(showDetails);
   };
-
-  renderDetail = () => {
-    const { selectedUserDetails } = this.state;
+  renderDetail = (id) => {
+    const {
+      selectedUserDetails,
+      selectedUserIdsData,
+      selectedUserData,
+    } = this.state;
     const userData = selectedUserDetails;
-    console.log(userData);
+    console.log(selectedUserIdsData);
+    console.log(selectedUserData);
+    const filteredData = selectedUserData[id];
+    console.log(filteredData);
     return (
       <div className="userData">
-        <h3>Repositories ({userData.length})</h3>
-        {userData.map((repos) => {
+        <h3>Repositories ({filteredData.length})</h3>
+        {filteredData.map((repos) => {
           return (
             <div className="userRepos" key={repos.id}>
               <div className="repoInfo">
@@ -130,9 +148,12 @@ class GithubFinder extends React.PureComponent {
       </div>
     );
   };
-
   renderUsers = () => {
-    const { showDetails, data, selectedUserId } = this.state;
+    const {
+      showDetails,
+      data,
+      selectedUserIdsData,
+    } = this.state;
     return (
       <div className="users">
         <ul>
@@ -160,16 +181,14 @@ class GithubFinder extends React.PureComponent {
                           this.handleDetails(item.id, item.repos_url)
                         }
                       >
-                        {selectedUserId === item.id && showDetails
+                        {selectedUserIdsData[item.id] === item.id && showDetails
                           ? "CloseDetails"
                           : "OpenDetails"}
                       </button>
                     </div>
                   </div>
                 </div>
-                {showDetails
-                  ? selectedUserId === item.id && this.renderDetail(item.id)
-                  : ""}
+                {selectedUserIdsData[item.id] ? this.renderDetail(item.id) : ""}
               </div>
             );
           })}
@@ -177,12 +196,11 @@ class GithubFinder extends React.PureComponent {
       </div>
     );
   };
-
   render() {
     return (
       <div className="mainContainer">
         <div className="navBar">{this.renderNavBar()}</div>
-        {this.renderUsers()}
+        <div>{this.renderUsers()}</div>
       </div>
     );
   }
